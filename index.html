@@ -3,42 +3,80 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Terminal Access</title>
+<title>DDoS Linux</title>
 
 <style>
 body {
     margin: 0;
     background: black;
-    color: #00ff9f;
     font-family: monospace;
+    color: #00ff9f;
 }
 
+/* HEADER */
+.header {
+    text-align: center;
+    font-size: 28px;
+    padding: 15px;
+    font-weight: bold;
+    animation: glow 1.5s infinite alternate;
+}
+
+@keyframes glow {
+    from { color: #00ff9f; }
+    to { color: #ff0000; }
+}
+
+/* TERMINAL */
 .container {
-    padding: 20px;
+    padding: 15px;
 }
 
 #terminal {
-    height: 80vh;
+    height: 70vh;
     overflow-y: auto;
     white-space: pre-line;
+    margin-top: 10px;
 }
 
+/* INPUT LABEL */
+.label {
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+/* INPUT */
 input {
     width: 100%;
     background: black;
     border: none;
+    border-bottom: 1px solid #00ff9f;
     color: #00ff9f;
     font-size: 16px;
     outline: none;
+    padding: 8px;
+}
+
+/* COLORS */
+.success {
+    color: #00ff9f;
+}
+
+.error {
+    color: red;
 }
 </style>
 </head>
 
 <body>
 
+<div class="header">DDoS Linux</div>
+
 <div class="container">
     <div id="terminal"></div>
-    <input id="input" placeholder="ENTER IP OR LINK..." autofocus />
+
+    <div class="label">ENTER YOUR IP / LINK:</div>
+    <input id="input" autofocus />
 </div>
 
 <script>
@@ -46,8 +84,11 @@ input {
 const terminal = document.getElementById("terminal");
 const input = document.getElementById("input");
 
-function print(text) {
-    terminal.innerHTML += text + "\n";
+function print(text, type="success") {
+    let line = document.createElement("div");
+    line.className = type;
+    line.textContent = text;
+    terminal.appendChild(line);
     terminal.scrollTop = terminal.scrollHeight;
 }
 
@@ -61,8 +102,8 @@ input.addEventListener("keydown", function(e) {
         input.value = "";
 
         if (!isValidLink(value)) {
-            print("[-] ERROR: INVALID TARGET");
-            print("[!] TRY AGAIN...\n");
+            print("[-] ERROR: INVALID TARGET", "error");
+            print("[!] TRY AGAIN...", "error");
             return;
         }
 
@@ -80,22 +121,23 @@ function startFakeAttack(target) {
         let success = Math.random() > 0.2;
 
         if (success) {
-            print("[+] REQUEST SENT TO " + target);
+            print("[+] REQUEST SENT TO " + target, "success");
         } else {
-            print("[-] BOTNET FAILURE...");
+            print("[-] BOTNET FAILURE...", "error");
         }
 
         count++;
 
-        if (count >= 200) { // 20 saniyə (10/saniyə)
+        if (count >= 200) {
             clearInterval(interval);
 
-            print("\n[!] PROXY/BOTNET SENT!");
-            print("[!] PLEASE TRY AGAIN AFTER 24 HOURS");
-            print("[...] PREPARING NEXT BOTNET...\n");
+            print("");
+            print("[!] PROXY/BOTNET SENT!", "success");
+            print("[!] PLEASE TRY AGAIN AFTER 24 HOURS", "error");
+            print("[...] PREPARING NEXT BOTNET...\n", "success");
         }
 
-    }, 100); // saniyədə 10 dəfə
+    }, 100);
 }
 
 </script>
