@@ -18,6 +18,7 @@ body {
     text-align: center;
     font-size: 15px;
     margin-top: 10px;
+    position: relative;
 }
 
 /* TERMINAL */
@@ -48,13 +49,13 @@ input {
     padding: 8px;
 }
 
-/* LOGO (GIZLI BASDA) */
+/* LOGO (ARTIQ FLOW-DAN CIXDI) */
 .logo-box {
     display: none;
-    position: relative;
-    left: 58%;
+    position: absolute;
+    top: 100%;          /* header-in altı */
+    left: 58%;          /* biraz sağ */
     transform: translateX(-50%);
-    margin-top: 10px;
     text-align: center;
 }
 
@@ -114,20 +115,21 @@ input {
 | |    | | '_ \| | | \ \/ /  / _` |/ _` |/ _ \/ __| \ \ / / |
 | |____| | | | | |_| |>  <  | (_| | (_| | (_) \__ \  \ V /| |
 |______|_|_| |_|\__,_/_/\_\  \__,_|\__,_|\___/|___/   \_/ |_|
-</pre>
-</div>
+    
+    <!-- LOGO BURDA -->
+    <div id="logoBox" class="logo-box">
+        <img src="anon.png">
+        <div class="logo-text">
+            REAL BOTNET ACTIVE<br>
+            USE WITH CAUTION :D
+        </div>
 
-<!-- LOGO -->
-<div id="logoBox" class="logo-box">
-    <img src="anon.png">
-    <div class="logo-text">
-        REAL BOTNET ACTIVE<br>
-        USE WITH CAUTION :D
+        <div class="bar"><div class="fill"></div></div>
+        <div class="bar"><div class="fill"></div></div>
+        <div class="bar"><div class="fill"></div></div>
     </div>
 
-    <div class="bar"><div class="fill"></div></div>
-    <div class="bar"><div class="fill"></div></div>
-    <div class="bar"><div class="fill"></div></div>
+</pre>
 </div>
 
 <div class="container">
@@ -166,7 +168,7 @@ input.addEventListener("keydown", function(e) {
             return;
         }
 
-        logoBox.style.display = "block"; // ENTER edəndə çıxır
+        logoBox.style.display = "block";
 
         startFakeAttack(value);
     }
