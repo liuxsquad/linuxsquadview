@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Terminal</title>
 
 <style>
@@ -16,27 +15,25 @@ body {
 /* HEADER */
 .header {
     text-align: center;
-    font-size: 11px;
-    line-height: 13px;
-    margin-top: 10px;
+    font-size: 14px; /* biraz böyüdü */
+    margin-top: 15px;
 }
 
 /* TERMINAL */
 .container {
-    padding: 15px;
-    margin-right: 160px;
+    padding: 20px;
+    margin-right: 220px;
 }
 
 #terminal {
-    height: 50vh;
+    height: 60vh;
     overflow-y: auto;
     white-space: pre-line;
-    margin-top: 20px;
 }
 
 /* INPUT */
 .label {
-    margin-top: 40px;
+    margin-top: 30px;
     font-size: 16px;
 }
 
@@ -47,57 +44,46 @@ input {
     border-bottom: 1px solid #00ff9f;
     color: #00ff9f;
     font-size: 16px;
-    outline: none;
     padding: 8px;
 }
 
-/* LOGO PC */
+/* LOGO */
 .logo-box {
     position: fixed;
-    right: 20px;
-    top: 50%;
-    transform: translateY(-50%);
+    right: 40px;   /* kənardan içəri */
+    bottom: 60px;  /* dibdən qaldırıldı */
     text-align: center;
 }
 
 .logo-box img {
-    width: 120px;
+    width: 160px; /* böyüdü */
     animation: spin 2s linear infinite;
 }
 
 .logo-text {
+    margin-top: 12px;
+    font-size: 12px;
+}
+
+/* HACKER EFFECT (altında animasiya) */
+.hacker-effect {
     margin-top: 15px;
-    font-size: 11px;
+    width: 120px;
+    height: 4px;
+    background: #00ff9f;
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 0.2; transform: scaleX(0.5); }
+    50% { opacity: 1; transform: scaleX(1); }
+    100% { opacity: 0.2; transform: scaleX(0.5); }
 }
 
 /* SPIN */
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
-}
-
-/* 📱 MOBİL DÜZƏLİŞ */
-@media (max-width: 600px) {
-    .container {
-        margin-right: 0;
-    }
-
-    .logo-box {
-        position: fixed;
-        bottom: 10px;       /* aşağıya qoyduq */
-        left: 50%;
-        transform: translateX(-50%);
-        top: auto;
-    }
-
-    .logo-box img {
-        width: 90px;
-    }
-
-    .logo-text {
-        font-size: 10px;
-        margin-top: 8px;
-    }
 }
 
 /* COLORS */
@@ -127,12 +113,16 @@ input {
     <input id="input" autofocus />
 </div>
 
+<!-- LOGO -->
 <div class="logo-box">
     <img src="anon.png">
     <div class="logo-text">
         REAL BOTNET ACTIVE<br>
         USE WITH CAUTION :D
     </div>
+
+    <!-- HACKER EFFECT -->
+    <div class="hacker-effect"></div>
 </div>
 
 <script>
@@ -177,7 +167,7 @@ function startFakeAttack(target) {
         let success = Math.random() > 0.2;
 
         if (success) {
-            print("[+] REQUEST SENT TO " + target, "success");
+            print("[+] REQUEST SENT TO " + target);
         } else {
             print("[-] BOTNET FAILURE...", "error");
         }
@@ -188,7 +178,7 @@ function startFakeAttack(target) {
             clearInterval(interval);
 
             print("");
-            print("[!] PROCESS COMPLETED", "success");
+            print("[!] PROCESS COMPLETED");
             print("[!] WAIT 24 HOURS, BOTNET PREPARING...");
         }
 
