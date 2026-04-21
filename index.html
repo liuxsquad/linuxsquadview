@@ -20,10 +20,39 @@ body {
     margin-top: 10px;
 }
 
-/* LOGO BLOK */
+/* TERMINAL */
+.container {
+    padding: 15px;
+}
+
+#terminal {
+    height: 50vh;
+    overflow-y: auto;
+    white-space: pre-line;
+    margin-top: 20px;
+}
+
+/* INPUT */
+.label {
+    margin-top: 40px;
+    font-size: 16px;
+}
+
+input {
+    width: 100%;
+    background: black;
+    border: none;
+    border-bottom: 1px solid #00ff9f;
+    color: #00ff9f;
+    font-size: 16px;
+    padding: 8px;
+}
+
+/* LOGO (GIZLI BASDA) */
 .logo-box {
+    display: none;
     position: relative;
-    left: 58%; /* biraz sağa */
+    left: 58%;
     transform: translateX(-50%);
     margin-top: 10px;
     text-align: center;
@@ -62,34 +91,6 @@ body {
     100% { width: 100%; }
 }
 
-/* TERMINAL */
-.container {
-    padding: 15px;
-}
-
-#terminal {
-    height: 50vh;
-    overflow-y: auto;
-    white-space: pre-line;
-    margin-top: 20px;
-}
-
-/* INPUT */
-.label {
-    margin-top: 40px;
-    font-size: 16px;
-}
-
-input {
-    width: 100%;
-    background: black;
-    border: none;
-    border-bottom: 1px solid #00ff9f;
-    color: #00ff9f;
-    font-size: 16px;
-    padding: 8px;
-}
-
 /* SPIN */
 @keyframes spin {
     0% { transform: rotate(0deg); }
@@ -116,8 +117,8 @@ input {
 </pre>
 </div>
 
-<!-- LOGO ALTDA -->
-<div class="logo-box">
+<!-- LOGO -->
+<div id="logoBox" class="logo-box">
     <img src="anon.png">
     <div class="logo-text">
         REAL BOTNET ACTIVE<br>
@@ -140,6 +141,7 @@ input {
 
 const terminal = document.getElementById("terminal");
 const input = document.getElementById("input");
+const logoBox = document.getElementById("logoBox");
 
 function print(text, type="success") {
     let line = document.createElement("div");
@@ -163,6 +165,8 @@ input.addEventListener("keydown", function(e) {
             print("[!] TRY AGAIN...", "error");
             return;
         }
+
+        logoBox.style.display = "block"; // ENTER edəndə çıxır
 
         startFakeAttack(value);
     }
