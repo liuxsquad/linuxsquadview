@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Terminal</title>
 
 <style>
@@ -15,25 +16,27 @@ body {
 /* HEADER */
 .header {
     text-align: center;
-    font-size: 14px; /* biraz böyüdü */
-    margin-top: 15px;
+    font-size: 15px; /* böyüdü */
+    line-height: 15px;
+    margin-top: 10px;
 }
 
 /* TERMINAL */
 .container {
-    padding: 20px;
-    margin-right: 220px;
+    padding: 15px;
+    margin-right: 160px;
 }
 
 #terminal {
-    height: 60vh;
+    height: 50vh;
     overflow-y: auto;
     white-space: pre-line;
+    margin-top: 20px;
 }
 
 /* INPUT */
 .label {
-    margin-top: 30px;
+    margin-top: 40px;
     font-size: 16px;
 }
 
@@ -44,46 +47,49 @@ input {
     border-bottom: 1px solid #00ff9f;
     color: #00ff9f;
     font-size: 16px;
+    outline: none;
     padding: 8px;
 }
 
 /* LOGO */
 .logo-box {
     position: fixed;
-    right: 40px;   /* kənardan içəri */
-    bottom: 60px;  /* dibdən qaldırıldı */
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
     text-align: center;
 }
 
 .logo-box img {
-    width: 160px; /* böyüdü */
+    width: 170px; /* böyüdü */
     animation: spin 2s linear infinite;
 }
 
 .logo-text {
-    margin-top: 12px;
-    font-size: 12px;
-}
-
-/* HACKER EFFECT (altında animasiya) */
-.hacker-effect {
     margin-top: 15px;
-    width: 120px;
-    height: 4px;
-    background: #00ff9f;
-    animation: pulse 1s infinite;
-}
-
-@keyframes pulse {
-    0% { opacity: 0.2; transform: scaleX(0.5); }
-    50% { opacity: 1; transform: scaleX(1); }
-    100% { opacity: 0.2; transform: scaleX(0.5); }
+    font-size: 13px; /* böyüdü */
 }
 
 /* SPIN */
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+
+/* MOBILE */
+@media (max-width: 600px) {
+    .container {
+        margin-right: 0;
+    }
+
+    .logo-box {
+        position: static;
+        margin-top: 20px;
+    }
+
+    .logo-box img {
+        width: 120px;
+    }
 }
 
 /* COLORS */
@@ -113,16 +119,12 @@ input {
     <input id="input" autofocus />
 </div>
 
-<!-- LOGO -->
 <div class="logo-box">
     <img src="anon.png">
     <div class="logo-text">
         REAL BOTNET ACTIVE<br>
         USE WITH CAUTION :D
     </div>
-
-    <!-- HACKER EFFECT -->
-    <div class="hacker-effect"></div>
 </div>
 
 <script>
