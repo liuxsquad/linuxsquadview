@@ -3,50 +3,33 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>System Access</title>
+<title>Terminal Access</title>
 
 <style>
 body {
     margin: 0;
     background: black;
     color: #00ff9f;
-    font-family: "Courier New", monospace;
+    font-family: monospace;
 }
 
 .container {
-    text-align: center;
-    padding-top: 80px;
+    padding: 20px;
 }
 
-h1 {
-    font-size: 22px;
-    letter-spacing: 2px;
-}
-
-#output {
-    margin-top: 30px;
-    font-size: 14px;
+#terminal {
+    height: 80vh;
+    overflow-y: auto;
     white-space: pre-line;
 }
 
-.navbar {
-    position: fixed;
-    bottom: 0;
+input {
     width: 100%;
-    display: flex;
-    justify-content: space-around;
-    border-top: 1px solid #00ff9f;
-    padding: 10px 0;
-}
-
-.btn {
+    background: black;
+    border: none;
     color: #00ff9f;
-    cursor: pointer;
-    font-size: 18px;
-}
-
-.btn:hover {
-    color: red;
+    font-size: 16px;
+    outline: none;
 }
 </style>
 </head>
@@ -54,47 +37,65 @@ h1 {
 <body>
 
 <div class="container">
-    <h1>ACCESS TERMINAL</h1>
-    <div id="output"></div>
-</div>
-
-<div class="navbar">
-    <div class="btn" onclick="showWatch()">⌂</div>
-    <div class="btn" onclick="startLogs()">⏱</div>
+    <div id="terminal"></div>
+    <input id="input" placeholder="ENTER IP OR LINK..." autofocus />
 </div>
 
 <script>
 
-const devices = [
-    "iPhone X", "iPhone 11", "iPhone 12", "iPhone 13",
-    "Samsung S10", "Samsung S20", "Samsung S21",
-    "Xiaomi Mi 10", "Redmi Note 9", "Huawei P30",
-    "OnePlus 8", "Pixel 5"
-];
+const terminal = document.getElementById("terminal");
+const input = document.getElementById("input");
 
-function showWatch() {
-    document.getElementById("output").innerHTML =
-        "I AM WATCHING YOU...\nI CAN SEE YOU...";
+function print(text) {
+    terminal.innerHTML += text + "\n";
+    terminal.scrollTop = terminal.scrollHeight;
 }
 
-function startLogs() {
-    let output = document.getElementById("output");
-    output.innerHTML = "";
+function isValidLink(text) {
+    return text.includes(".");
+}
+
+input.addEventListener("keydown", function(e) {
+    if (e.key === "Enter") {
+        let value = input.value.trim();
+        input.value = "";
+
+        if (!isValidLink(value)) {
+            print("[-] ERROR: INVALID TARGET");
+            print("[!] TRY AGAIN...\n");
+            return;
+        }
+
+        startFakeAttack(value);
+    }
+});
+
+function startFakeAttack(target) {
+    print("[+] TARGET LOCKED: " + target);
+    print("[+] INITIALIZING BOTNET...\n");
 
     let count = 0;
 
     let interval = setInterval(() => {
-        let device = devices[Math.floor(Math.random() * devices.length)];
-        let text = `[+] ${device} user accessed the system...`;
+        let success = Math.random() > 0.2;
 
-        output.innerHTML += text + "\n";
+        if (success) {
+            print("[+] REQUEST SENT TO " + target);
+        } else {
+            print("[-] BOTNET FAILURE...");
+        }
 
         count++;
 
-        if (count >= 5) {
+        if (count >= 200) { // 20 saniyə (10/saniyə)
             clearInterval(interval);
+
+            print("\n[!] PROXY/BOTNET SENT!");
+            print("[!] PLEASE TRY AGAIN AFTER 24 HOURS");
+            print("[...] PREPARING NEXT BOTNET...\n");
         }
-    }, 2000); // 10 saniyədə 5 nəfər
+
+    }, 100); // saniyədə 10 dəfə
 }
 
 </script>
