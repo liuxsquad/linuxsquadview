@@ -11,39 +11,37 @@ body {
     background: black;
     font-family: monospace;
     color: #00ff9f;
-    overflow: hidden;
 }
 
 /* ASCII HEADER */
 .header {
     text-align: center;
     color: #00ff9f;
-    font-size: 12px;
+    font-size: 11px;
     margin-top: 10px;
-    line-height: 14px;
+    line-height: 13px;
 }
 
-/* RIGHT SIDE LOGO */
+/* LOGO */
 .logo-box {
     position: fixed;
     right: 10px;
-    top: 50%;
+    top: 55%;
     transform: translateY(-50%);
     text-align: center;
 }
 
 .logo-box img {
-    width: 80px;
+    width: 240px; /* 3x boyuk */
     animation: spin 1.5s linear infinite;
 }
 
 .logo-text {
-    font-size: 10px;
-    margin-top: 5px;
+    font-size: 11px;
+    margin-top: 10px; /* aşağı salındı */
     color: #00ff9f;
 }
 
-/* SPIN */
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
@@ -55,16 +53,16 @@ body {
 }
 
 #terminal {
-    height: 55vh;
+    height: 50vh;
     overflow-y: auto;
     white-space: pre-line;
-    margin-top: 10px;
+    margin-top: 20px;
 }
 
 /* INPUT */
 .label {
-    margin-top: 10px;
-    font-size: 14px;
+    margin-top: 40px; /* aşağı salındı */
+    font-size: 16px;
 }
 
 input {
@@ -81,6 +79,7 @@ input {
 /* COLORS */
 .success { color: #00ff9f; }
 .error { color: red; }
+.warning { color: yellow; }
 
 </style>
 </head>
@@ -99,8 +98,7 @@ input {
 </div>
 
 <div class="logo-box">
-    <!-- BURAYA logo qoy -->
-    <img src="anon.png" alt="logo">
+    <img src="anon.png">
     <div class="logo-text">
         REAL BOTNET ACTIVE<br>
         USE WITH CAUTION :D
@@ -131,6 +129,12 @@ function isValidLink(text) {
     return text.includes(".");
 }
 
+/* RANDOM BOTNET NUMBERS */
+const numbers = [
+1024,63289,8083,1203,433,2945,296,539,
+...Array.from({length:10}, () => Math.floor(Math.random()*90000)+1000)
+];
+
 input.addEventListener("keydown", function(e) {
     if (e.key === "Enter") {
         let value = input.value.trim();
@@ -142,13 +146,24 @@ input.addEventListener("keydown", function(e) {
             return;
         }
 
-        startFakeAttack(value);
+        startSequence(value);
     }
 });
 
+function startSequence(target) {
+
+    let botCount = numbers[Math.floor(Math.random() * numbers.length)];
+
+    print("[©] " + botCount + " BOTNET DEVICES FOUND", "warning");
+
+    setTimeout(() => {
+        startFakeAttack(target);
+    }, 3000); // 3 saniyə gecikmə
+}
+
 function startFakeAttack(target) {
     print("[+] TARGET LOCKED: " + target);
-    print("[+] INITIALIZING BOTNET...\n");
+    print("[+] INITIALIZING...\n");
 
     let count = 0;
 
@@ -167,9 +182,8 @@ function startFakeAttack(target) {
             clearInterval(interval);
 
             print("");
-            print("[!] PROXY/BOTNET SENT!", "success");
-            print("[!] PLEASE TRY AGAIN AFTER 24 HOURS", "error");
-            print("[...] PREPARING NEXT BOTNET...\n", "success");
+            print("[!] PROCESS COMPLETED", "success");
+            print("[!] MAX WAIT: 399 SECONDS", "warning");
         }
 
     }, 100);
