@@ -20,6 +20,48 @@ body {
     margin-top: 10px;
 }
 
+/* LOGO BLOK */
+.logo-box {
+    position: relative;
+    left: 58%; /* biraz sağa */
+    transform: translateX(-50%);
+    margin-top: 10px;
+    text-align: center;
+}
+
+.logo-box img {
+    width: 170px;
+    animation: spin 2s linear infinite;
+}
+
+.logo-text {
+    margin-top: 12px;
+    font-size: 13px;
+}
+
+/* LOADING BAR */
+.bar {
+    width: 120px;
+    height: 6px;
+    border: 1px solid #00ff9f;
+    margin: 6px auto;
+}
+
+.fill {
+    height: 100%;
+    width: 0%;
+    background: #00ff9f;
+    animation: load 3s linear infinite;
+}
+
+.bar:nth-child(3) .fill { animation-delay: 0.5s; }
+.bar:nth-child(4) .fill { animation-delay: 1s; }
+
+@keyframes load {
+    0% { width: 0%; }
+    100% { width: 100%; }
+}
+
 /* TERMINAL */
 .container {
     padding: 15px;
@@ -48,49 +90,6 @@ input {
     padding: 8px;
 }
 
-/* LOGO (ORTAYA YAXIN SAĞ) */
-.logo-box {
-    position: fixed;
-    top: 50%;
-    left: 65%; /* əsas dəyişiklik */
-    transform: translate(-50%, -50%);
-    text-align: center;
-}
-
-.logo-box img {
-    width: 170px;
-    animation: spin 2s linear infinite;
-}
-
-.logo-text {
-    margin-top: 15px;
-    font-size: 13px;
-}
-
-/* LOADING BAR */
-.bar {
-    width: 120px;
-    height: 6px;
-    border: 1px solid #00ff9f;
-    margin: 6px auto;
-    position: relative;
-}
-
-.fill {
-    height: 100%;
-    width: 0%;
-    background: #00ff9f;
-    animation: load 3s linear infinite;
-}
-
-.bar:nth-child(3) .fill { animation-delay: 0.5s; }
-.bar:nth-child(4) .fill { animation-delay: 1s; }
-
-@keyframes load {
-    0% { width: 0%; }
-    100% { width: 100%; }
-}
-
 /* SPIN */
 @keyframes spin {
     0% { transform: rotate(0deg); }
@@ -117,14 +116,7 @@ input {
 </pre>
 </div>
 
-<div class="container">
-    <div id="terminal"></div>
-
-    <div class="label">ENTER YOUR IP / LINK:</div>
-    <input id="input" autofocus />
-</div>
-
-<!-- LOGO -->
+<!-- LOGO ALTDA -->
 <div class="logo-box">
     <img src="anon.png">
     <div class="logo-text">
@@ -132,10 +124,16 @@ input {
         USE WITH CAUTION :D
     </div>
 
-    <!-- 3 LOADING BAR -->
     <div class="bar"><div class="fill"></div></div>
     <div class="bar"><div class="fill"></div></div>
     <div class="bar"><div class="fill"></div></div>
+</div>
+
+<div class="container">
+    <div id="terminal"></div>
+
+    <div class="label">ENTER YOUR IP / LINK:</div>
+    <input id="input" autofocus />
 </div>
 
 <script>
