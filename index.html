@@ -16,15 +16,13 @@ body {
 /* HEADER */
 .header {
     text-align: center;
-    font-size: 15px; /* böyüdü */
-    line-height: 15px;
+    font-size: 15px;
     margin-top: 10px;
 }
 
 /* TERMINAL */
 .container {
     padding: 15px;
-    margin-right: 160px;
 }
 
 #terminal {
@@ -47,49 +45,56 @@ input {
     border-bottom: 1px solid #00ff9f;
     color: #00ff9f;
     font-size: 16px;
-    outline: none;
     padding: 8px;
 }
 
-/* LOGO */
+/* LOGO (ORTAYA YAXIN SAĞ) */
 .logo-box {
     position: fixed;
-    right: 20px;
     top: 50%;
-    transform: translateY(-50%);
+    left: 65%; /* əsas dəyişiklik */
+    transform: translate(-50%, -50%);
     text-align: center;
 }
 
 .logo-box img {
-    width: 170px; /* böyüdü */
+    width: 170px;
     animation: spin 2s linear infinite;
 }
 
 .logo-text {
     margin-top: 15px;
-    font-size: 13px; /* böyüdü */
+    font-size: 13px;
+}
+
+/* LOADING BAR */
+.bar {
+    width: 120px;
+    height: 6px;
+    border: 1px solid #00ff9f;
+    margin: 6px auto;
+    position: relative;
+}
+
+.fill {
+    height: 100%;
+    width: 0%;
+    background: #00ff9f;
+    animation: load 3s linear infinite;
+}
+
+.bar:nth-child(3) .fill { animation-delay: 0.5s; }
+.bar:nth-child(4) .fill { animation-delay: 1s; }
+
+@keyframes load {
+    0% { width: 0%; }
+    100% { width: 100%; }
 }
 
 /* SPIN */
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
-}
-
-/* MOBILE */
-@media (max-width: 600px) {
-    .container {
-        margin-right: 0;
-    }
-
-    .logo-box {
-        position: static;
-        margin-top: 20px;
-    }
-
-    .logo-box img {
-        width: 120px;
-    }
 }
 
 /* COLORS */
@@ -119,12 +124,18 @@ input {
     <input id="input" autofocus />
 </div>
 
+<!-- LOGO -->
 <div class="logo-box">
     <img src="anon.png">
     <div class="logo-text">
         REAL BOTNET ACTIVE<br>
         USE WITH CAUTION :D
     </div>
+
+    <!-- 3 LOADING BAR -->
+    <div class="bar"><div class="fill"></div></div>
+    <div class="bar"><div class="fill"></div></div>
+    <div class="bar"><div class="fill"></div></div>
 </div>
 
 <script>
