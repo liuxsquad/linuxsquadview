@@ -51,7 +51,7 @@ input {
     padding: 8px;
 }
 
-/* LOGO */
+/* LOGO PC */
 .logo-box {
     position: fixed;
     right: 20px;
@@ -76,19 +76,27 @@ input {
     100% { transform: rotate(360deg); }
 }
 
-/* MOBILE */
+/* 📱 MOBİL DÜZƏLİŞ */
 @media (max-width: 600px) {
     .container {
         margin-right: 0;
     }
 
     .logo-box {
-        position: static;
-        margin-top: 20px;
+        position: fixed;
+        bottom: 10px;       /* aşağıya qoyduq */
+        left: 50%;
+        transform: translateX(-50%);
+        top: auto;
     }
 
     .logo-box img {
-        width: 100px;
+        width: 90px;
+    }
+
+    .logo-text {
+        font-size: 10px;
+        margin-top: 8px;
     }
 }
 
